@@ -12,6 +12,8 @@ id = admin@admin.com
 pass = Admin@123
 
 
+http://127.0.0.1:8000/login
+
 
 
 
