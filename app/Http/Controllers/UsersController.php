@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use App\Models\role_user;
 use App\Models\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
@@ -16,34 +19,35 @@ class UsersController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+     public function register()
     {
-        //
+    return view('register'); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
-    }
+        
+$firstname = $request->firstname;
+$lastname = $request-> lastname;
+$email =$request->email;
+$mobile =$request->mobile;
+$password =Hash::make($request->password);
+$cpassword =Hash::make($request->cpassword);
+$data=[];
+$data=['firstname'=>$firstname , 'lastname'=>$lastname,  'email'=>$email ,'mobile'=>$mobile , 'password'=>$password ];
+$a = User::create($data);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\users  $users
-     * @return \Illuminate\Http\Response
-     */
+
+$new = $a['id'];
+$user_id=$new;
+$role_id = 2;
+$red=[];
+$red =['user_id'=>$user_id , 'role_id'=>$role_id];
+$a =  role_user::create($red);
+return redirect('/login')->with('error' , 'Success');
+}
+        
     public function show(users $users)
     {
         //

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use App\Models\User;
 use App\Models\role_user;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 
